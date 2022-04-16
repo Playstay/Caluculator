@@ -13,9 +13,9 @@ public enum Type {
     /** 除算記号 */
     DIV("/", 2),
     /**　開きカッコ */
-    RRACKET("("),
+    LBRACKET("("),
     /**　閉じカッコ */
-    LBRACKET(")");
+    RBRACKET(")");
 
     private String value;
     private int priority;
@@ -39,12 +39,12 @@ public enum Type {
      * @return valueに対応する列挙型
      * @throws IllegalArgumentException valueに対応する列挙型が存在しない場合
      */
-    public Type getOperand(String value) {
-        if (value == null) {
-            throw new NullPointerException("value should not be null.");
-        }
-
+    public static Type getOperand(String value) {
         for (Type type : Type.values()) {
+            if(type==NUMBER){
+                continue;
+            }
+
             if (type.value.equals(value)) {
                 return type;
             }
