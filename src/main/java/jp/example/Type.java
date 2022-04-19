@@ -1,6 +1,8 @@
 package jp.example;
 
-
+/**
+ * トークンの種別を表現する列挙型です。
+ */
 public enum Type {
     /** 数値 */
     NUMBER,
