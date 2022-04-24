@@ -2,11 +2,11 @@ package jp.example;
 
 import java.math.BigDecimal;
 
-public class Symbol {
+public class Token {
     private BigDecimal value;
     private Type type;
 
-    public Symbol(String value){
+    public Token(String value){
         if(value ==null){
             throw new IllegalArgumentException();
         }
