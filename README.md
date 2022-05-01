@@ -1,21 +1,5 @@
-## Getting Started
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+# このリポジトリについて
+社内のプログラミング研修で行う演習問題の解答例を作成しています。
 
 # 開発用メモ
 - 数字はどう保持する?
@@ -23,6 +7,8 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
     + しかし、BigDecimalでは割と簡単に切り捨てが発生する
         * ex.) 1/3
     + どちらを取るか
+    + そもそもBigDecimalはデフォルトでは丸めを行わない(=無限小数となる演算はエラー)
+    + MathContextを使用して丸めを行うようにするか。はたまた有理数クラスを作成するか...
     
 ## プログラムの流れ
 1. 入力をトークンに分解。その際に入力として受け付けないものがあったらエラー
