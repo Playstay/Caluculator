@@ -6,15 +6,28 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ * 逆ポーランド記法をもとに計算処理を実行するクラスです。
+ * コンストラクタで{@link MathContext}を指定することで丸めモードを使用できますが、モードに従って丸めるのは除算の時のみです。
+ */
 public class Accumulator {
     private static final MathContext DEAFAULT_CONTEXT = MathContext.DECIMAL128;
 
     private MathContext context;
 
+    /**
+     * 丸めモードに{@link MathContext#DECIMAL128}を使用するように設定します。
+     */
     public Accumulator() {
         this(DEAFAULT_CONTEXT);
     }
 
+    /**
+     * 引数の{@link MathContext}を利用して丸めを行うように設定します。
+     * 
+     * @param context
+     * @throws NullPointerException contextがnullの場合
+     */
     public Accumulator(MathContext context) {
         if (context == null) {
             throw new NullPointerException();
@@ -23,6 +36,13 @@ public class Accumulator {
         this.context = context;
     }
 
+    /**
+     * 計算処理を実行します。
+     * 
+     * @param expression 逆ポーランド記法順に格納されているリスト
+     * @return 計算結果のBigDecimal
+     * @throws ArithmeticException 計算の途中で0除算した場合。
+     */
     public BigDecimal caluculate(List<Token> expression) {
         Deque<BigDecimal> stack = new ArrayDeque<>();
         for (Token token : expression) {
@@ -36,7 +56,7 @@ public class Accumulator {
         }
 
         if (stack.size() != 1) {
-            throw new RuntimeException();
+            throw new ArithmeticException();
         }
         return stack.pop();
     }
@@ -80,6 +100,8 @@ public class Accumulator {
     }
 
     private BigDecimal divide(BigDecimal dividend, BigDecimal divisor) {
+        // 除算については丸めがないモード(MathContext.UNNECESSARY)では無限小数になるものは例外が発生する
+        // そのため、contextを設定して起こらないようにする。
         return dividend.divide(divisor, context);
     }
 }
