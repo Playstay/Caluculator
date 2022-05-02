@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AccumulatorTest {
     
@@ -52,5 +53,13 @@ public class AccumulatorTest {
         List<Token> exp = Arrays.stream("1 2 + 4 5 - *".split(" ")).map(x -> new Token(x)).toList();
         
         assertEquals(new BigDecimal("-3"), accumulator.caluculate(exp));
+    }
+    
+    @Test
+    public void 逆ポーランド記法がおかしい場合例外が発生すること(){
+        Accumulator accumulator = new Accumulator();
+        List<Token> exp = Arrays.stream("1 3 2 + 4 5 - *".split(" ")).map(x -> new Token(x)).toList();
+        
+        assertThrows(ArithmeticException.class, ()-> accumulator.caluculate(exp));
     }
 }
