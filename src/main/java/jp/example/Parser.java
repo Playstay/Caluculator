@@ -35,7 +35,7 @@ public class Parser {
                         break;
                     }
 
-                    buffer.add(stack.pop());
+                    buffer.add(stack.removeFirst());
                 }
             }
         }
@@ -61,7 +61,7 @@ public class Parser {
      */
     private static void moveToBuffer(Deque<Token> stack, List<Token> buffer) {
         while (!stack.isEmpty()) {
-            Token popdToken = stack.pop();
+            Token popdToken = stack.removeFirst();
             if (popdToken.getType() == Type.LBRACKET) {
                 return;
             }
